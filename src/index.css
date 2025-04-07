@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.custom-placeholder::placeholder {
+    @apply text-pink-500; /* or any Tailwind placeholder color */
+  }
