@@ -39,8 +39,18 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
     },
-    updateUser: (state, action) => {},
-    logout: (state, action) => {},
+    updateUser: (state, action) => { },
+    logout: (state) => {
+      state.isAuthenticated = null;
+      state.token = null;
+      state.isOtpSent = null;
+      state.sendingOtp = null;
+      state.isLoading = null;
+      state.isError = false;
+      state.userInfo = {};
+      state.streamId = null;
+      localStorage.removeItem('token')
+    },
   },
 });
 
@@ -54,4 +64,7 @@ export const {
   otpSent,
   failedSendingOtp,
 } = authSlice.actions;
+
+
+
 export default authSlice.reducer;

@@ -1,61 +1,87 @@
-import OtpVerification from "../components/ui/OtpVerification";
-import LoginBox from "../components/ui/LoginBox";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getUser } from "../service";
 import { useNavigate } from "react-router-dom";
+import { getUser } from "../service";
 import {
   fetchingDone,
   fetchingfailed,
   fetchingInit,
 } from "../redux/slice/AuthSlice";
+import OtpVerification from "../components/ui/OtpVerification";
+import LoginBox from "../components/ui/LoginBox";
+import Loader from "../components/ui/Loader";
+
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { isOtpSent, isAuthenticated, isLoading } = useSelector(
     (store) => store.Auth
   );
-  console.log(isLoading);
-  console.log(isAuthenticated);
-  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    (async function () {
-      dispatch(fetchingInit());
-      try {
-        let response = await getUser();
-        if (response.status === 200) {
-          dispatch(fetchingDone({ ...response?.data?.data, token }));
-        }
-      } catch (error) {
-        dispatch(fetchingfailed());
-        console.log(error);
+  const [initialLoading, setInitialLoading] = useState(true);
+
+  const fetchUser = useCallback(async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      dispatch(fetchingfailed("No token found"));
+      setInitialLoading(false);
+      return;
+    }
+
+    dispatch(fetchingInit());
+    try {
+      const response = await getUser();
+      if (response.status === 200) {
+        dispatch(fetchingDone({ ...response?.data?.data, token }));
       }
-    })();
-  }, [token]);
+    } catch (error) {
+      dispatch(
+        fetchingfailed(error?.response?.data?.message || "An error occurred")
+      );
+      localStorage.removeItem("token");
+    } finally {
+      setInitialLoading(false);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!initialLoading) return;
+      setInitialLoading(false);
+      fetchUser();
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [fetchUser, initialLoading]);
+
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate]);
+
+  if (initialLoading) {
+    return <Loader fullScreen />;
+  }
 
   if (isLoading) {
-    return <div className="w-full h-[100vh] bg-base-100"></div>;
+    return <Loader fullScreen />;
   }
-  return (
-    <div className="w-full h-screen flex flex-col items-center justify-center">
-      <div
-        data-theme="gigaguerilla"
-        className="w-96 p-8 rounded-xl shadow-lg bg-base-100 border-2 border-neutral"
-      >
-        {isOtpSent ? (
-          <OtpVerification email={email} />
-        ) : (
-          <LoginBox email={email} setEmail={setEmail} />
-        )}
+  if (!isAuthenticated) {
+    return (
+      <div className="w-full h-screen flex flex-col items-center justify-center">
+        <div
+          data-theme="gigaguerilla"
+          className="w-96 p-8 rounded-xl shadow-lg bg-base-100 border-2 border-neutral"
+        >
+          {isOtpSent ? (
+            <OtpVerification email={email} />
+          ) : (
+            <LoginBox email={email} setEmail={setEmail} />
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
-
-export default Login;
+export default React.memo(Login);

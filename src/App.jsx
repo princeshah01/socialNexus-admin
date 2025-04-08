@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
 import { ToastContainer } from "react-toastify";
@@ -14,9 +14,6 @@ const Loader = () => {
 };
 
 const App = () => {
-  useEffect(() => {
-    document.documentElement.classList.add("dark");
-  }, []);
   return (
     <Suspense fallback={<Loader />}>
       <>

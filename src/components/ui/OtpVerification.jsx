@@ -26,7 +26,7 @@ const OtpVerification = ({ email }) => {
   const handleVerification = async () => {
     dispatch(fetchingInit());
     try {
-      if (otp.length !== 4 && !email) {
+      if (otp && otp.length !== 4 && !email) {
         throw new Error("Please Enter OTP first");
       }
       let response = await verifyOtp(otp, email);

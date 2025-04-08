@@ -18,7 +18,6 @@ const LoginBox = ({ email, setEmail }) => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { sendingOtp } = useSelector((store) => store.Auth);
-  console.log("🚀 ~ LoginBox ~ sendingOtp:", sendingOtp);
   const HandelLogin = async (e) => {
     e.preventDefault();
     dispatch(otpSending());
@@ -144,21 +143,9 @@ const LoginBox = ({ email, setEmail }) => {
       </div>
 
       <div className="w-full space-y-4">
-        <button className="text-sm text-base hover:underline underline-offset-2">
+        <button className="text-base hover:underline underline-offset-2">
           Forgot Password?
         </button>
-        {/* <button
-          disabled={!(!passwordError && !emailError && email && password)}
-          type="submit"
-          onClick={HandelLogin}
-          className="btn btn-outline  w-full hover:bg-neutral text-base  border-neutral"
-        >
-          {sendingOtp ? (
-            <span className="loading loading-spinner"></span>
-          ) : (
-            "Login"
-          )}
-        </button> */}
         <button
           disabled={!(!passwordError && !emailError && email && password)}
           type="submit"

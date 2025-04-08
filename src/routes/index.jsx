@@ -11,6 +11,7 @@ import Users from "../pages/Users";
 import { Outlet } from "react-router-dom";
 import Layout from "../components/Layout";
 import ProtectedRoute from "./ProtectedRoute";
+import Profile from "../pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "monitor",
         element: <MessageMonitor />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
