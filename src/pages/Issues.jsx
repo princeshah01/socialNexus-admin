@@ -1,7 +1,11 @@
 import React from "react";
-
+import Table from "../components/ui/Table";
 const Issues = () => {
-  return <div>Issues</div>;
+  return (
+    <div>
+      <Table />
+    </div>
+  );
 };
 
 export default Issues;

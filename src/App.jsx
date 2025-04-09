@@ -8,7 +8,7 @@ import AppStore from "./redux/store";
 const Loader = () => {
   return (
     <div>
-      <h1>Loading...</h1>
+      <h1 className="">Loading...</h1>
     </div>
   );
 };

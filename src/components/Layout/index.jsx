@@ -4,20 +4,26 @@ import { useState } from "react";
 const Layout = ({ children }) => {
   const [togglesideBar, setToggleSideBar] = useState(false);
   return (
-    <div className="w-full min-h-screen flex flex-col p-[0.8rem]">
+    <div className="w-full  min-h-screen flex flex-col lg:p-[0.8rem] p-[0.6rem]">
       <Navbar />
-      <div className="flex flex-row justify-between ">
+      <div className="flex flex-row justify-between gap-3">
         <Sidebar
           togglesideBar={togglesideBar}
           setToggleSideBar={setToggleSideBar}
         />
         <section
           data-theme="gigaguerilla"
-          className={`flex bg-base-100 ${
-            togglesideBar ? "w-[80.5vw]" : "w-[90.5vw]"
-          } border-2 border-neutral rounded-2xl flex justify-center items-center transition-all duration-200`}
+          className={`fixed top-25  left-0 flex justify-center items-center bg-base-100 border-2 border-neutral rounded-2xl transition-all duration-200
+    ${
+      togglesideBar
+        ? "lg:w-[81.7vw] w-[62vw] left-70"
+        : "lg:w-[91.3vw] w-[81.7vw] left-32"
+    }
+    h-[84vh] overflow-hidden`}
         >
-          {children}
+          <div className="w-[100%] h-[100%] overflow-y-auto p-5">
+            {children}
+          </div>
         </section>
       </div>
     </div>
@@ -25,3 +31,6 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+// ${
+//   togglesideBar ? "w-[80.5vw]" : "w-[90.5vw]"
+// }

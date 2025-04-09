@@ -11,7 +11,7 @@ const Navbar = () => {
     navigate("/login");
   };
   return (
-    <nav data-theme="gigaguerilla" className="rounded-2xl  mb-4 bg-base-100 ">
+    <nav data-theme="gigaguerilla" className=" rounded-2xl  mb-4 bg-base-100 ">
       <div className="navbar bg-base-100 shadow-sm border-2 border-neutral rounded-2xl">
         <div className="flex-1">
           <Link to="dashboard">
