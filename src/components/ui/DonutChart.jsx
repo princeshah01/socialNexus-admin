@@ -1,74 +1,3 @@
-// import { useState } from "react";
-// import ReactApexChart from "react-apexcharts";
-
-// const DonutChart = ({ series }) => {
-//   const [state, _] = useState({
-//     series: series,
-//     options: {
-//       chart: {
-//         width: 30,
-//         type: "donut",
-//       },
-//       dataLabels: {
-//         enabled: true,
-//         formatter: function (val) {
-//           return `${val.toFixed(1)}%`;
-//         },
-//         style: {
-//           fontSize: "14px",
-//         },
-//       },
-//       plotOptions: {
-//         pie: {
-//           donut: {
-//             labels: {
-//               show: false,
-//             },
-//           },
-//           expandOnClick: true,
-//         },
-//       },
-//       tooltip: {
-//         enabled: true,
-//         y: {
-//           formatter: function (value) {
-//             return `${value}`;
-//           },
-//           title: {
-//             formatter: (seriesName) => seriesName,
-//           },
-//         },
-//       },
-//       responsive: [
-//         {
-//           breakpoint: 800,
-//           options: {
-//             chart: {
-//               width: 200,
-//             },
-//             legend: {
-//               show: false,
-//             },
-//           },
-//         },
-//       ],
-//       legend: {
-//         show: false,
-//       },
-
-//     },
-//   });
-
-//   return (
-//     <ReactApexChart
-//       options={state.options}
-//       series={state.series}
-//       type="donut"
-//       width={400}
-//     />
-//   );
-// };
-// export default DonutChart;
 import ReactApexChart from "react-apexcharts";
 import { useState } from "react";
 
@@ -114,11 +43,11 @@ const DonutChart = ({ series }) => {
           },
         },
       },
-      legend: {
-        position: "bottom",
-        horizontalAlign: "center",
-        fontSize: "14px",
-      },
+      // legend: {
+      //   position: "bottom",
+      //   horizontalAlign: "center",
+      //   fontSize: "14px",
+      // },
       responsive: [
         {
           breakpoint: 1024,
