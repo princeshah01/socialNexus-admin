@@ -7,6 +7,8 @@ import LineChart from "../components/ui/LineChart";
 import PieChart from "../components/ui/PieChart";
 import Table from "../components/ui/Table";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+
 const Dashboard = () => {
   return (
     <div data-theme="gigaguerilla">

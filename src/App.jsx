@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { ParticleBackground } from "./components/ParticleBackground";
 import { Provider } from "react-redux";
 import AppStore from "./redux/store";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const Loader = () => {
   return (
     <div>
@@ -14,19 +15,22 @@ const Loader = () => {
 };
 
 const App = () => {
+  const client = new QueryClient();
   return (
     <Suspense fallback={<Loader />}>
       <>
-        <Provider store={AppStore}>
-          <ParticleBackground />
+        <QueryClientProvider client={client}>
+          <Provider store={AppStore}>
+            <ParticleBackground />
 
-          <RouterProvider router={router} />
-          <ToastContainer
-            theme="dark"
-            position="bottom-right"
-            autoClose={3000}
-          />
-        </Provider>
+            <RouterProvider router={router} />
+            <ToastContainer
+              theme="dark"
+              position="bottom-right"
+              autoClose={3000}
+            />
+          </Provider>
+        </QueryClientProvider>
       </>
     </Suspense>
   );
