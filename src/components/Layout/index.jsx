@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
     ${
       togglesideBar
         ? "lg:w-[81.7vw] w-[62vw] left-70"
-        : "lg:w-[91.3vw] w-[81.7vw] left-32"
+        : "lg:w-[91.3vw] w-[81.7vw] left-33"
     }
     h-[84vh] overflow-hidden`}
         >

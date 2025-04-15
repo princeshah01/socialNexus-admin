@@ -1,7 +1,15 @@
 import ReactApexChart from "react-apexcharts";
 import { useState } from "react";
 
-const DonutChart = ({ series }) => {
+const DonutChart = ({ data }) => {
+  let series = [];
+  let labels = [];
+  Object.keys(data).forEach((key) => {
+    console.log(key);
+    series.push(data[key]);
+    labels.push(key);
+  });
+
   const [state, _] = useState({
     series: series,
     options: {
@@ -9,6 +17,12 @@ const DonutChart = ({ series }) => {
         type: "donut",
         width: "100%",
       },
+      colors: [
+        "oklch(70% 0.165 254.624)",
+        "oklch(79% 0.209 151.711)",
+        "oklch(70% 0.191 22.216)",
+        "oklch(71% 0.202 349.761)",
+      ],
       dataLabels: {
         enabled: true,
         formatter: function (val) {
@@ -93,7 +107,7 @@ const DonutChart = ({ series }) => {
       legend: {
         show: false,
       },
-      labels: ["Pending", "Resolved", "Closed", "Rejected"],
+      labels: labels,
     },
   });
 

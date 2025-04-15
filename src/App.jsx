@@ -6,6 +6,8 @@ import { ParticleBackground } from "./components/ParticleBackground";
 import { Provider } from "react-redux";
 import AppStore from "./redux/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 const Loader = () => {
   return (
     <div>
@@ -30,6 +32,7 @@ const App = () => {
               autoClose={3000}
             />
           </Provider>
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </>
     </Suspense>
