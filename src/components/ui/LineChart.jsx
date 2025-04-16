@@ -1,11 +1,20 @@
 import ReactApexChart from "react-apexcharts";
 import { useState } from "react";
 const LineChart = ({ data }) => {
-  const [state, setState] = useState({
+  let series = [];
+  let labels = [];
+  console.log(data);
+  data.map((item) => {
+    labels.push(item.day);
+    series.push(item.count);
+  });
+  series.reverse();
+  labels.reverse();
+  const [state, _] = useState({
     series: [
       {
         name: "Users",
-        data: data,
+        data: series,
       },
     ],
     options: {
@@ -16,7 +25,7 @@ const LineChart = ({ data }) => {
           enabled: false,
         },
         toolbar: {
-          show: false,
+          show: true,
         },
       },
       dataLabels: {
@@ -37,7 +46,7 @@ const LineChart = ({ data }) => {
         theme: "dark",
       },
       xaxis: {
-        categories: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        categories: labels,
       },
     },
   });

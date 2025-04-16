@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
-const PieChart = ({ series, labels }) => {
+const PieChart = ({ data }) => {
+  let series = [];
+  let labels = [];
+  Object.keys(data).forEach((key) => {
+    series.push(data[key]);
+    labels.push(key.charAt(0).toUpperCase() + key.slice(1));
+  });
   const [state, _] = useState({
     series: series,
     options: {
@@ -10,6 +16,12 @@ const PieChart = ({ series, labels }) => {
         width: "100%",
       },
       labels: labels,
+      colors: [
+        "oklch(70% 0.165 254.624)",
+        "oklch(79% 0.209 151.711)",
+        "oklch(70% 0.191 22.216)",
+        "oklch(71% 0.202 349.761)",
+      ],
       dataLabels: {
         enabled: true,
         formatter: function (val) {

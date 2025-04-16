@@ -69,3 +69,15 @@
 #scroll {
   scrollbar-width: thin !important;
 }
+.apexcharts-menu {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+.warning {
+  background-color: rgba(255, 98, 102, 0.26);
+}
+.success {
+  background-color: rgba(1, 223, 114, 0.26);
+}
+.info {
+  background-color: rgba(78, 160, 255, 0.26);
+}

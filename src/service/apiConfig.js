@@ -1,8 +1,9 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const api = axios.create({
-  baseURL: "http://192.168.250.124:3000",
-  timeout: 10000,
+  baseURL: "http://192.168.137.111:3000",
+  timeout: 1000,
 });
 
 api.interceptors.request.use(
@@ -19,6 +20,10 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    if (error.code === "ECONNABORTED") {
+      console.log(error);
+      return Promise.reject(error);
+    }
     if (error.response && error.response.status === 400) {
       //may be token expired
       console.log("Unauthorized! Logging out...");

@@ -18,7 +18,6 @@ const LoginBox = ({ email, setEmail }) => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { sendingOtp } = useSelector((store) => store.Auth);
-  console.log("🚀 ~ LoginBox ~ sendingOtp:", sendingOtp);
   const HandelLogin = async (e) => {
     e.preventDefault();
     dispatch(otpSending());
@@ -33,8 +32,15 @@ const LoginBox = ({ email, setEmail }) => {
 
         return;
       }
+      console.log("===========try==== ,", response);
     } catch (error) {
-      toast.error(error.response.data.message || "Check again");
+      console.log("==========catch===== ,", error);
+      if (error.code === "ECONNABORTED") {
+        toast.error(error?.message || "Request Timeout...");
+        dispatch(failedSendingOtp());
+        return;
+      }
+      toast.error(error?.response?.data?.message || "Check again");
       dispatch(failedSendingOtp());
     }
   };

@@ -1,7 +1,30 @@
 import React from "react";
-
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import { getIssueDetails } from "../service";
+import IssueCard from "../components/ui/IssueCard";
+import { toast } from "react-toastify";
 const IssueDetails = () => {
-  return <div>IssueDetails</div>;
+  const { id } = useParams();
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["queryDetails", id],
+    queryFn: () => getIssueDetails(id),
+  });
+  console.log(data, isLoading, isError, error);
+  if (isLoading) {
+    return <p>Loading</p>;
+  }
+  if (isError && error) {
+    toast.error(error);
+  }
+  if (data)
+    return (
+      <div>
+        <div className="w-full  flex-col flex lg:flex-row  border-2 border-neutral rounded-2xl bg-base-300">
+          <IssueCard data={data?.data?.data} />
+        </div>
+      </div>
+    );
 };
 
 export default IssueDetails;
