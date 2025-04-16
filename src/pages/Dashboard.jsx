@@ -107,10 +107,10 @@ const Dashboard = () => {
                   See all
                 </Link>
               </div>
-              {issueRaisedToday ? (
+              {issueRaisedToday.length > 0 ? (
                 <Table data={issueRaisedToday} />
               ) : (
-                <div className="flex justify-center h-[80%] w-full">
+                <div className="text-xl flex justify-center h-[80%] w-full items-center">
                   No issue raised today
                 </div>
               )}

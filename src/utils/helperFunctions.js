@@ -8,8 +8,15 @@ export const getWarning = (increasedPercentage) => {
   }
 };
 export const statusColors = {
-  Pending: "warning",
-  Resolved: "success",
-  InProgress: "info",
-  Rejected: "error",
+  Pending: "bg-warning",
+  Resolved: "bg-success",
+  InProgress: "bg-info",
+  Rejected: "bg-error",
+};
+
+export const getIcon = {
+  Pending: "CircleSlash",
+  Resolved: "CheckCircle",
+  InProgress: "Clock",
+  Rejected: "CircleX",
 };

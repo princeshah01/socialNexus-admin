@@ -11,10 +11,10 @@ const TableRow = ({ rowdata }) => {
     issueType,
     createdAt,
   } = rowdata;
-  createdAt = new Date(createdAt);
-  const hours = createdAt.getHours().toString().padStart(2, "0");
-  const minutes = createdAt.getMinutes().toString().padStart(2, "0");
-  const time = `${hours}:${minutes}`;
+  createdAt = new Date(createdAt).toLocaleString();
+  // const hours = createdAt.getHours().toString().padStart(2, "0");
+  // const minutes = createdAt.getMinutes().toString().padStart(2, "0");
+  // const time = `${hours}:${minutes}`;
 
   return (
     <>
@@ -29,14 +29,14 @@ const TableRow = ({ rowdata }) => {
           </td> */}
           <td>{userName}</td>
           <td>{issueType}</td>
-          <td>{`${time} ${hours > 12 ? "PM" : "AM"}`}</td>
+          <td>{createdAt}</td>
 
           <td>
-            <span
-              className={`bg-${statusColors[status]} text-base-100 w-fit py-1 px-2 rounded-lg`}
+            <p
+              className={`${statusColors[status]} text-base-100 flex items-center justify-center py-1 rounded-lg w-20`}
             >
               {status}
-            </span>
+            </p>
           </td>
           <td className="flex gap-4">
             <div />
