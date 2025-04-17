@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DashboardCard from "../components/ui/DashboardCard";
 import {
   BadgeAlert,
@@ -17,17 +17,23 @@ import { useQuery } from "@tanstack/react-query";
 import { getDashboardData } from "../service";
 import { getWarning } from "../utils/helperFunctions";
 import { toast } from "react-toastify";
+import DashboardSkeleton from "../components/ui/SimmerUI/DashBoardPage";
 const Dashboard = () => {
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState();
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["dashboard"],
     queryFn: getDashboardData,
-    // refetchInterval: 5000,
+    refetchInterval: 3000,
   });
-  console.log(data, "--data", isLoading, "---isloading", error);
-
+  useEffect(() => {
+    if (data) {
+      setFilteredData(data?.data?.Issue?.issueRaisedToday);
+    }
+  }, [data]);
   if (isLoading) {
     // have to create simmer ui
-    return <div>Loading</div>;
+    return <DashboardSkeleton />;
   }
   if (isError) {
     toast.error(error.response.data.message);
@@ -53,8 +59,22 @@ const Dashboard = () => {
     },
     genderBasedCount,
     userCountPerWeek,
-  } = data.data;
-  console.log(genderBasedCount);
+  } = data?.data || {};
+
+  const handelSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    const newData = issueRaisedToday.filter(
+      (item) =>
+        item.userId.userName.toLowerCase().includes(query) ||
+        item.issueType.toLowerCase().includes(query) ||
+        item.status.toLowerCase().includes(query)
+    );
+
+    setFilteredData(newData);
+  };
+
   return (
     data && (
       <div data-theme="gigaguerilla">
@@ -97,18 +117,35 @@ const Dashboard = () => {
             <div className="w-full px-2 pt-3 lg:w-1/3 bg-base-300 border-neutral border-2 rounded-xl">
               <LineChart data={userCountPerWeek} />
             </div>
-            <div className="w-full h-[24rem] lg:w-2/3 bg-base-300 border-neutral border-2 rounded-xl overflow-y-scroll">
-              {/* table content */}
-              <div className="w-full h-8 px-4 flex justify-end  items-center ">
+
+            <div className="relative w-full h-[400px] overflow-y-auto  border-neutral border-2 rounded-md">
+              <div className="sticky gap-4 top-0 z-10 backdrop-blur-xl px-4 h-12 flex justify-end items-center border-b border-neutral rounded-sm">
+                <div className="h-full py-2">
+                  <input
+                    value={searchQuery}
+                    onChange={handelSearch}
+                    type="text"
+                    className="h-full border-1 rounded-lg border-neutral focus:outline-none p-1 shadow-2xl"
+                    placeholder="Search"
+                    list="issue"
+                  />
+                  <datalist id="issue">
+                    {filteredData &&
+                      filteredData.map((d) => (
+                        <option key={d._id} value={d.userId.userName} />
+                      ))}
+                  </datalist>
+                </div>
                 <Link
                   to="/issues"
-                  className="hover:border-b-2 w-fit text-right text-sm "
+                  className="hover:border-b-2 w-fit text-right text-sm"
                 >
                   See all
                 </Link>
               </div>
+
               {issueRaisedToday.length > 0 ? (
-                <Table data={issueRaisedToday} />
+                <Table data={filteredData} />
               ) : (
                 <div className="text-xl flex justify-center h-[80%] w-full items-center">
                   No issue raised today

@@ -15,7 +15,7 @@ const OtpVerification = ({ email }) => {
   const [otp, setotp] = useState(null);
   const [timer, setTimer] = useState(20);
   const { isLoading } = useSelector((store) => store.Auth);
-  const auth = useSelector((store) => store.Auth);
+  // const auth = useSelector((store) => store.Auth);
   const dispatch = useDispatch();
   useEffect(() => {
     let stopWatch = setInterval(() => {
@@ -73,7 +73,7 @@ const OtpVerification = ({ email }) => {
       </React.Fragment>
     );
   };
-  console.log(auth);
+  // console.log(auth);
   return (
     <div className="flex flex-col space-y-8 items-center justify-between">
       <div className="flex flex-col items-center gap-5">

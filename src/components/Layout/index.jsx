@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
     }
     h-[84vh] overflow-hidden`}
         >
-          <div className="w-[100%] h-[100%] overflow-y-auto p-5">
+          <div className="w-[100%] h-[100%] overflow-y-auto p-4">
             {children}
           </div>
         </section>

@@ -1,9 +1,8 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 
 const api = axios.create({
-  baseURL: "http://192.168.137.111:3000",
-  timeout: 1000,
+  baseURL: "http://192.168.110.156:3000",
+  timeout: 20000,
 });
 
 api.interceptors.request.use(
@@ -26,8 +25,8 @@ api.interceptors.response.use(
     }
     if (error.response && error.response.status === 400) {
       //may be token expired
-      console.log("Unauthorized! Logging out...");
-      localStorage.removeItem("token");
+      // console.log("Unauthorized! Logging out...");
+      // localStorage.removeItem("token");
     }
     return Promise.reject(error);
   }

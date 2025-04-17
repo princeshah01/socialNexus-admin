@@ -9,3 +9,8 @@ export const getDashboardData = () => api.get("/admin-dashboard-data");
 export const getIssueDetails = (id) => api.get(`/issue/${id}`);
 export const getAllIssues = ({ pageParam }) =>
   api.get(`/issue/view?page=${pageParam}`);
+
+
+export const updateIssue = ({ id, post }) => {
+  return api.post(`/issue/${id}`, post)
+}

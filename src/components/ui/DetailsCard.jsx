@@ -11,7 +11,6 @@ const DetailsCard = ({ IconName, header, text }) => {
       setIconName(getIcon[text]);
     }
   }, [text]);
-  console.log(statusColors[text]);
   return (
     <div className="flex flex-row gap-2">
       <div className="w-1/10 p-1 flex items-start justify-center ">
@@ -24,7 +23,7 @@ const DetailsCard = ({ IconName, header, text }) => {
         <span
           className={`text-lg tracking-wide opacity-90 ${
             isStatus ? statusColors[text] : ""
-          } rounded-2xl px-1 py-0.5`}
+          } rounded-sm px-2 py-0.5`}
         >
           {text}
         </span>

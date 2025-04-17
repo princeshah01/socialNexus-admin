@@ -4,11 +4,9 @@ const Table = ({ data }) => {
   return (
     <div id="scroll" className="overflow-y-auto ">
       <table className="table">
-        <thead>
+        <thead className="">
           <tr>
-            {/* <th>
-            <input type="checkbox" className="checkbox checkbox-xs" /> 
-          </th> */}
+            <th>S.No.</th>
             <th>Reported By</th>
             <th>Type</th>
             <th>Reported At</th>
@@ -16,8 +14,8 @@ const Table = ({ data }) => {
             <th>Actions</th>
           </tr>
         </thead>
-        {data.map((row) => (
-          <TableRow key={row._id} rowdata={row} />
+        {data.map((row, idx) => (
+          <TableRow key={row._id} rowdata={row} idx={idx} />
         ))}
       </table>
     </div>

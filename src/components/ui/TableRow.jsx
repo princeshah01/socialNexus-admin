@@ -3,7 +3,7 @@ import { ScanEye } from "lucide-react";
 import { statusColors } from "../../utils/helperFunctions";
 import { Link } from "react-router-dom";
 
-const TableRow = ({ rowdata }) => {
+const TableRow = ({ rowdata, idx }) => {
   let {
     _id,
     userId: { userName },
@@ -20,13 +20,14 @@ const TableRow = ({ rowdata }) => {
     <>
       <tbody>
         <tr>
-          {/* <td>
-            <input
+          <td>
+            {/* <input
               type="checkbox"
               defaultChecked
               className="checkbox checkbox-xs"
-            />
-          </td> */}
+            /> */}
+            {idx + 1}
+          </td>
           <td>{userName}</td>
           <td>{issueType}</td>
           <td>{createdAt}</td>
@@ -40,7 +41,7 @@ const TableRow = ({ rowdata }) => {
           </td>
           <td className="flex gap-4">
             <div />
-            <Link to={`/issues/${_id}`} className="">
+            <Link to={`/issues/${_id}`} className="hover:scale-110">
               <ScanEye size={20} />
             </Link>
           </td>

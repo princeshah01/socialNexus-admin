@@ -7,10 +7,9 @@ import { toast } from "react-toastify";
 const IssueDetails = () => {
   const { id } = useParams();
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["queryDetails", id],
+    queryKey: ["issueDetails", id],
     queryFn: () => getIssueDetails(id),
   });
-  console.log(data, isLoading, isError, error);
   if (isLoading) {
     return <p>Loading</p>;
   }
@@ -21,7 +20,10 @@ const IssueDetails = () => {
     return (
       <div>
         <div className="w-full  flex-col flex lg:flex-row  border-2 border-neutral rounded-2xl bg-base-300">
-          <IssueCard data={data?.data?.data} />
+          <IssueCard
+            key={JSON.stringify(data?.data?.data)}
+            data={data?.data?.data}
+          />
         </div>
       </div>
     );

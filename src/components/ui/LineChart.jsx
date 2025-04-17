@@ -3,7 +3,7 @@ import { useState } from "react";
 const LineChart = ({ data }) => {
   let series = [];
   let labels = [];
-  console.log(data);
+  // console.log(data);
   data.map((item) => {
     labels.push(item.day);
     series.push(item.count);

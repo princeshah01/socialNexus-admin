@@ -5,7 +5,7 @@ const DonutChart = ({ data }) => {
   let series = [];
   let labels = [];
   Object.keys(data).forEach((key) => {
-    console.log(key);
+    // console.log(key);
     series.push(data[key]);
     labels.push(key);
   });
