@@ -2,7 +2,7 @@ import React from "react";
 import TableRow from "./TableRow";
 const Table = ({ data }) => {
   return (
-    <div id="scroll" className="overflow-y-auto ">
+    <div id="scroll" className="overflow-auto">
       <table className="table">
         <thead className="">
           <tr>

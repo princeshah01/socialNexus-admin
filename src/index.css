@@ -81,3 +81,11 @@
 .info {
   background-color: rgba(78, 160, 255, 0.26);
 }
+.gradient {
+  background: #545454;
+  background: linear-gradient(
+    0deg,
+    rgba(51, 49, 49, 1) 10%,
+    rgba(31, 31, 31, 1) 60%
+  );
+}

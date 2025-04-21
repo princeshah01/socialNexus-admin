@@ -12,29 +12,19 @@ const TableRow = ({ rowdata, idx }) => {
     createdAt,
   } = rowdata;
   createdAt = new Date(createdAt).toLocaleString();
-  // const hours = createdAt.getHours().toString().padStart(2, "0");
-  // const minutes = createdAt.getMinutes().toString().padStart(2, "0");
-  // const time = `${hours}:${minutes}`;
 
   return (
     <>
       <tbody>
         <tr>
-          <td>
-            {/* <input
-              type="checkbox"
-              defaultChecked
-              className="checkbox checkbox-xs"
-            /> */}
-            {idx + 1}
-          </td>
+          <td>{idx + 1}</td>
           <td>{userName}</td>
           <td>{issueType}</td>
           <td>{createdAt}</td>
 
           <td>
             <p
-              className={`${statusColors[status]} text-base-100 flex items-center justify-center py-1 rounded-lg w-20`}
+              className={`${statusColors[status]} border-2 text-base-100 flex items-center justify-center py-[2px] opacity-70 rounded-lg w-18`}
             >
               {status}
             </p>

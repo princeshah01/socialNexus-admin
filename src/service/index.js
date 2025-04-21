@@ -10,7 +10,10 @@ export const getIssueDetails = (id) => api.get(`/issue/${id}`);
 export const getAllIssues = ({ pageParam }) =>
   api.get(`/issue/view?page=${pageParam}`);
 
-
 export const updateIssue = ({ id, post }) => {
-  return api.post(`/issue/${id}`, post)
-}
+  return api.post(`/issue/${id}`, post);
+};
+export const getUserList = ({ pageParam }) =>
+  api.get(`/admin/users?page=${pageParam}`);
+
+export const getUserData = (id) => api.get(`/admin/user/${id}`);

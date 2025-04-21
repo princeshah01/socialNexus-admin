@@ -24,8 +24,10 @@ const Dashboard = () => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["dashboard"],
     queryFn: getDashboardData,
-    refetchInterval: 3000,
+    // refetchInterval: 3000,
   });
+  console.log(isError, error);
+
   useEffect(() => {
     if (data) {
       setFilteredData(data?.data?.Issue?.issueRaisedToday);
@@ -119,13 +121,13 @@ const Dashboard = () => {
             </div>
 
             <div className="relative w-full h-[400px] overflow-y-auto  border-neutral border-2 rounded-md">
-              <div className="sticky gap-4 top-0 z-10 backdrop-blur-xl px-4 h-12 flex justify-end items-center border-b border-neutral rounded-sm">
+              <div className="sticky gap-4 top-0 z-10 backdrop-blur-[1px] px-4 h-12 flex justify-end items-center border-b border-neutral rounded-sm">
                 <div className="h-full py-2">
                   <input
                     value={searchQuery}
                     onChange={handelSearch}
                     type="text"
-                    className="h-full border-1 rounded-lg border-neutral focus:outline-none p-1 shadow-2xl"
+                    className="h-full bg-base-200 border-1 rounded-lg border-neutral focus:outline-none p-1 shadow-2xl"
                     placeholder="Search"
                     list="issue"
                   />
@@ -154,13 +156,14 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="flex flex-col lg:flex-row  gap-4">
-            <div className="w-full lg:w-1/3 flex justify-center items-center bg-base-300 border-neutral border-2 rounded-xl">
+            {/* // instead of radial make a map polygons for user  */}
+            {/* <div className="w-full lg:w-1/3 flex justify-center items-center bg-base-300 border-neutral border-2 rounded-xl">
               <RadialChart
                 data={todayIssueCountBasedOnStatus}
                 series={[10, 20, 70]}
                 labels={["Male", "Female", "Non-Binary"]}
               />
-            </div>
+            </div> */}
             <div className="w-full lg:w-1/3 flex justify-center items-center bg-base-300 border-neutral border-2 rounded-xl">
               {/* donut */}
               <DonutChart

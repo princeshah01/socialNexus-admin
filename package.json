@@ -19,6 +19,7 @@
     "primereact": "^10.9.4",
     "react": "^19.0.0",
     "react-apexcharts": "^1.7.0",
+    "react-daisyui": "^5.0.5",
     "react-dom": "^19.0.0",
     "react-intersection-observer": "^9.16.0",
     "react-redux": "^9.2.0",
@@ -39,7 +40,7 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
-    "tailwindcss": "^4.1.3",
+    "tailwindcss": "^4.1.4",
     "vite": "^6.2.0"
   }
 }

@@ -23,7 +23,7 @@ const DashboardCard = ({
       </div>
       <div
         className={`h-1/3 text-${
-          isWarning ? "warning" : "success"
+          isWarning == null ? null : isWarning === true ? "warning" : "success"
         } flex flex-row gap-2`}
       >
         {isWarning == null ? null : isWarning == true ? (

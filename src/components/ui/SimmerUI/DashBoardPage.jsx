@@ -8,16 +8,8 @@ const DashboardSkeleton = () => {
         {[1, 2, 3, 4].map((item) => (
           <div
             key={item}
-            className="card rounded-xl bg-base-200 h-32 animate-pulse border-neutral border-2"
-          >
-            <div className="card-body">
-              <div className="flex justify-between items-center">
-                <div className="h-6 w-24 bg-base-300 rounded"></div>
-                <div className="h-10 w-10 bg-base-300 rounded-full"></div>
-              </div>
-              <div className="h-8 w-16 bg-base-300 rounded mt-2"></div>
-            </div>
-          </div>
+            className="card rounded-xl bg-base-300 h-32 animate-pulse border-neutral border-2"
+          ></div>
         ))}
       </div>
 
@@ -25,7 +17,7 @@ const DashboardSkeleton = () => {
       <div className="flex flex-col gap-6">
         {/* First Row - Line Chart and Issues Table */}
         <div className="flex flex-col lg:flex-row gap-4">
-          <div className="w-full lg:w-1/3 h-[400px]  bg-base-200 border-neutral border-2 rounded-xl p-4 animate-pulse h-64">
+          <div className="w-full lg:w-1/3 h-[400px]  bg-base-300 border-neutral border-2 rounded-xl p-4 animate-pulse h-64">
             <div className="h-full w-full bg-base-300 rounded"></div>
           </div>
 
@@ -53,10 +45,8 @@ const DashboardSkeleton = () => {
           {[1, 2, 3].map((chart) => (
             <div
               key={chart}
-              className="bg-base-200 border-neutral border-2 rounded-xl p-4 animate-pulse h-64"
-            >
-              <div className="h-full w-full bg-base-300 rounded"></div>
-            </div>
+              className="bg-base-300 border-neutral border-2 rounded-xl p-4 animate-pulse h-64"
+            ></div>
           ))}
         </div>
       </div>

@@ -19,17 +19,19 @@ const IssueCard = ({ data }) => {
       toast.success(response.data.message);
     },
     onError: (error) => {
-      toast.error(error.message || "unable to update Issue Details");
+      toast.error(
+        error?.response?.data?.message || "unable to update Issue Details"
+      );
     },
   });
-  const [response, setResponse] = useState("");
+  const [newResponse, setResponse] = useState("");
   const HandelSumit = (e) => {
-    if (response.length <= 10) {
+    if (newResponse.length <= 10) {
       toast.error("Add some note..");
       return;
     }
     let post = {
-      response,
+      newResponse,
       status: e.target.innerText,
     };
     console.log(post);
@@ -41,6 +43,7 @@ const IssueCard = ({ data }) => {
     createdAt,
     issueType,
     status,
+    response,
     userId: { userName, _id: Uid },
   } = data;
   const raisedAt = new Date(createdAt).toLocaleString();
@@ -62,7 +65,9 @@ const IssueCard = ({ data }) => {
             <div className="flex flex-col gap-2">
               <h2 className="text-xl font-semibold">Response</h2>
               <textarea
-                value={response}
+                value={
+                  response && status === "Resolved" ? response : newResponse
+                }
                 onChange={(e) => setResponse(e.target.value)}
                 placeholder="Add a note about this status update..."
                 rows="5"
@@ -76,7 +81,7 @@ const IssueCard = ({ data }) => {
                   disabled={status === "Resolved"}
                   onClick={HandelSumit}
                   key={btn}
-                  className={`${statusColors[btn]} rounded-sm p-1 text-base-100 opacity-70 hover:opacity-100 hover:scale-105 transform ease-in-out disabled:hover:scale-100 disabled:hover:opacity-70`}
+                  className={`${statusColors[btn]} border-2 text-sm rounded-sm p-1  opacity-70 hover:opacity-100 hover:scale-105 transform ease-in-out disabled:hover:scale-100 disabled:opacity-30`}
                 >
                   {btn}
                 </button>
@@ -97,7 +102,12 @@ const IssueCard = ({ data }) => {
               text={raisedAt}
             />
             <DetailsCard IconName="Flag" header="Type:" text={issueType} />
-            <DetailsCard IconName="Clock" header="Status:" text={status} />
+            <DetailsCard
+              textSize={14}
+              IconName="Clock"
+              header="Status:"
+              text={status}
+            />
           </div>
           <Link
             to={`/users/${Uid}`}
